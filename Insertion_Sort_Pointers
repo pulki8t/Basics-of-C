@@ -1,0 +1,35 @@
+#include<stdio.h>
+int rand();
+void main()
+{
+    int i, j, k, n, arr[100];
+    int *ptr;
+    printf("Enter number of elements in array: ");
+    scanf("%d", &n);
+    ptr= arr;
+    for(i=0; i<n; i++)
+    {
+        *(ptr+i)= rand();
+    }
+    printf("Array of elements are ");
+    for(i=0; i<n; i++)
+    {
+        printf("%d ", *(ptr+i));
+    }
+    for(i=1; i<n; i++)
+    {
+        j=i-1;
+        k= *(ptr+i);
+        while(*(ptr+j)>k && j>=0)
+        {
+            *(ptr+j+1)= *(ptr+j);
+            j--;
+        }
+        *(ptr+j+1)= k;
+    }
+    printf("\nSorted array is ");
+    for(i=0; i<n; i++)
+    {
+        printf("%d ", *(ptr+i));
+    }
+}
