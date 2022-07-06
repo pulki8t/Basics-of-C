@@ -28,15 +28,6 @@ void preorder(struct node* root)
   }
 }
 
-void insert(node* new, int data)
-{
-  node* prev= NULL;
-  while(new!=NULL)
-  {
-    prev= new;
-  }
-}
-
 void main()
 {
   struct node* p = create(15);
