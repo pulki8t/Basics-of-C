@@ -65,6 +65,30 @@ struct node* insert(struct node* node, int item)
   return node;
 }
 
+void search(struct node* node, int item)
+{
+  if(node!=NULL)
+  {
+    if (node->item == item)
+    {
+      printf("Found");
+    }
+    else if (item< node->item)
+    {
+      search(node->left, item);
+    }
+    else if (item > node->item)
+    {
+      search(node->right, item);
+    }
+  }
+  else
+  {
+    printf("Not Found");
+  }
+}
+    
+
 void main()
 {
   struct node* p = create(15);
@@ -83,4 +107,7 @@ void main()
   preorder(p);
   postorder(p);
   inorder(p);
+
+  search(p, 16);
+  search(p, 19);
 }
