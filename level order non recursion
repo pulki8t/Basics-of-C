@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_Q_SIZE 500
+
+struct node
+{
+    int data;
+    struct node* left;
+    struct node* right;
+};
+
+struct node** CreateQueue(int*, int*);
+void EnQueue(struct node**, int*, struct node*);
+struct node* DeQueue(struct node**, int*);
+
+void levelorder(struct node* root)
+{
+    int last, first;
+    struct node** queue = CreateQueue(&first, &last);
+    struct node* temp_node = root;
+ 
+    while (temp_node)
+    {
+        printf("%d ", temp_node->data);
+        if (temp_node->left)
+            EnQueue(queue, &last, temp_node->left);
+        if (temp_node->right)
+            EnQueue(queue, &last, temp_node->right);
+        temp_node = DeQueue(queue, &first);
+    }
+}
+
+struct node** CreateQueue(int* first, int* last)
+{
+    struct node** queue = (struct node**)malloc(sizeof(struct node*) * MAX_Q_SIZE);
+    *first = *last = 0;
+    return queue;
+}
+ 
+void EnQueue(struct node** queue, int* last, struct node* new_node)
+{
+    queue[*last] = new_node;
+    (*last)++;
+}
+ 
+struct node* DeQueue(struct node** queue, int* first)
+{
+    (*first)++;
+    return queue[*first - 1];
+}
+
+struct node* newNode(int data)
+{
+    struct node* node = (struct node*)malloc(sizeof(struct node));
+    node->data = data;
+    node->left = NULL;
+    node->right = NULL;
+    return (node);
+}
+
+void main()
+{
+    struct node* root = newNode(1);
+    root->left = newNode(2);
+    root->right = newNode(3);
+    root->left->left = newNode(4);
+    root->left->right = newNode(5);
+    root->right->left = newNode(6);
+    root->right->right = newNode(7);
+    printf("Level Order traversal of binary tree is \n");
+    levelorder(root);
+
+}
