@@ -1,0 +1,27 @@
+visited= list()
+leaf = list()
+
+
+def sum(visited, graph, node):
+    #count=0
+
+    if node not in visited:
+        leaf.append(node)
+       # count= count+node
+       #print(node)
+        visited.append(node)
+        for n in graph[node]:
+            if n not in visited:
+                sum(visited, graph, n)
+
+        print(leaf)
+        #add = 0
+       # for i in range(len(leaf)):
+       #     add = add + leaf(i)
+        #print(add)
+    #print(count(leaf))
+
+if __name__ == "__main__":
+    graph= {1:[2, 3, 4], 2:[1, 5], 3:[1, 6, 7 ], 4:[1, 8], 5:[2], 6:[3], 7:[3], 8:[4, 9, 10], 9:[8], 10:[8]}
+    sum(visited, graph, 1)
+ #    print(visited)
